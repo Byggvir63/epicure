@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Epicure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #241012;
+    --panel: #2E1518;
+    --ink: #F1E6D3;
+    --ink-soft: #D8C6AE;
+    --gold: #C9A227;
+    --gold-bright: #E8C765;
+    --muted: #8C6F52;
+    --rule: rgba(201,162,39,0.25);
+    --dim: #6B4F45;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Work Sans', sans-serif;
+  }
+ 
+  *{ box-sizing: border-box; }
+ 
+  html,body{
+    margin:0;
+    padding:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+ 
+  body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding: clamp(2.5rem, 6vw, 5rem) clamp(1.25rem, 4vw, 2rem);
+  }
+ 
+  a{ color: inherit; }
+ 
+  .card{
+    width: 100%;
+    max-width: 720px;
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    padding: clamp(2.2rem, 5vw, 3.5rem);
+    opacity: 0;
+    transform: translateY(10px);
+    animation: rise 0.7s ease forwards;
+  }
+ 
+  @keyframes rise{ to{ opacity:1; transform:none; } }
+ 
+  @media (prefers-reduced-motion: reduce){
+    .card{ animation:none; opacity:1; transform:none; }
+  }
+ 
+  /* ---------- emblem + header ---------- */
+ 
+  .emblem{
+    width: 46px;
+    height: 46px;
+    margin: 0 auto 1.4rem;
+    color: var(--gold);
+    display:block;
+  }
+ 
+  header{ text-align:center; }
+ 
+  .eyebrow{
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    margin: 0 0 0.6rem;
+  }
+ 
+  h1{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.6rem, 6vw, 3.6rem);
+    margin: 0 0 0.9rem;
+    color: var(--ink);
+  }
+ 
+  .lede{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    max-width: 40ch;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+ 
+  /* ---------- menu list ---------- */
+ 
+  .menu{
+    margin-top: clamp(2.4rem, 5vw, 3.2rem);
+    border-top: 1px solid var(--rule);
+  }
+ 
+  .course{
+    padding: 1.7rem 0;
+    border-bottom: 1px solid var(--rule);
+    display:flex;
+    gap: 1.3rem;
+    align-items: flex-start;
+  }
+ 
+  .course-num{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--dim);
+    padding-top: 0.3rem;
+    flex-shrink:0;
+    width: 2.2rem;
+  }
+ 
+  .course-body{ flex:1; min-width:0; }
+ 
+  .course h2{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.6rem;
+    margin: 0 0 0.35rem;
+    color: var(--ink);
+  }
+ 
+  .course p{
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0 0 0.9rem;
+    max-width: 46ch;
+  }
+ 
+  a.open{
+    display:inline-flex;
+    align-items:center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--gold-bright);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 1px;
+    transition: border-color 0.2s ease;
+  }
+  a.open:hover, a.open:focus{ border-bottom-color: var(--gold-bright); }
+ 
+  .status{
+    font-size: 0.82rem;
+    color: var(--dim);
+    display:flex;
+    align-items:center;
+    gap: 0.5rem;
+  }
+ 
+  .dot{
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: 1px solid var(--dim);
+    flex-shrink:0;
+  }
+ 
+  footer.colophon{
+    margin-top: 1.8rem;
+    text-align:center;
+    font-size: 0.78rem;
+    color: var(--dim);
+  }
+</style>
+</head>
+<body>
+ 
+<div class="card">
+  <header>
+    <svg class="emblem" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 8 L34 8 L27 26 C27 30 21 30 21 26 Z"/>
+      <path d="M24 30 L24 40"/>
+      <path d="M16 40 L32 40"/>
+    </svg>
+    <p class="eyebrow">Gastronomie, cuisine, œnologie, mixologie</p>
+    <h1>Epicure</h1>
+    <p class="lede">Trois carnets pour une même faim.</p>
+  </header>
+ 
+  <div class="menu">
+ 
+    <div class="course">
+      <span class="course-num">I</span>
+      <div class="course-body">
+        <h2>Cuisine &amp; produits</h2>
+        <p>Recettes mises à l'épreuve, produits dénichés au fil des saisons.</p>
+        <a class="open" href="#" data-site="epicure-cuisine">Ouvrir le carnet cuisine</a>
+      </div>
+    </div>
+ 
+    <div class="course">
+      <span class="course-num">II</span>
+      <div class="course-body">
+        <h2>Tables</h2>
+        <p>Adresses visitées, plats jugés, additions commentées sans complaisance.</p>
+        <a class="open" href="#" data-site="epicure-tables">Ouvrir le carnet tables</a>
+      </div>
+    </div>
+ 
+    <div class="course">
+      <span class="course-num">III</span>
+      <div class="course-body">
+        <h2>Cave</h2>
+        <p>Domaines parcourus, bouteilles débouchées, alambics percés.</p>
+        <a class="open" href="#" data-site="epicure-cave">Ouvrir le carnet cave</a>
+      </div>
+    </div>
+ 
+    <div class="course">
+      <span class="course-num">IV</span>
+      <div class="course-body">
+        <h2>Carte des terroirs</h2>
+        <p>Une carte, un jour, pour situer chaque produit sur sa région d'origine.</p>
+        <span class="status"><span class="dot"></span>à venir</span>
+      </div>
+    </div>
+ 
+  </div>
+ 
+  <footer class="colophon">Une facette de l'Atlas des facettes.</footer>
+</div>
+ 
+</body>
+</html>
