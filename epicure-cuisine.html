@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuisine & produits — Epicure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #241012;
+    --panel: #2E1518;
+    --ink: #F1E6D3;
+    --ink-soft: #D8C6AE;
+    --gold: #C9A227;
+    --gold-bright: #E8C765;
+    --muted: #8C6F52;
+    --rule: rgba(201,162,39,0.25);
+    --dim: #6B4F45;
+    --sage: #7E9C6E;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Work Sans', sans-serif;
+  }
+ 
+  *{ box-sizing: border-box; }
+ 
+  html,body{
+    margin:0;
+    padding:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+ 
+  body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding: clamp(2.5rem, 6vw, 5rem) clamp(1.25rem, 4vw, 2rem);
+  }
+ 
+  a{ color: inherit; }
+ 
+  .page{
+    width: 100%;
+    max-width: 780px;
+  }
+ 
+  header.masthead{
+    text-align:center;
+    margin-bottom: clamp(2.4rem, 5vw, 3.4rem);
+  }
+ 
+  .kicker{
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    margin: 0 0 0.6rem;
+  }
+  .kicker a{
+    text-decoration: none;
+    border-bottom: 1px solid rgba(140,111,82,0.4);
+  }
+  .kicker a:hover{ color: var(--gold-bright); border-bottom-color: var(--gold-bright); }
+ 
+  h1{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.4rem, 5.6vw, 3.3rem);
+    margin: 0 0 0.9rem;
+    color: var(--ink);
+  }
+ 
+  .lede{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 48ch;
+    margin: 0 auto;
+    line-height: 1.55;
+  }
+ 
+  .filter-row{
+    display:flex;
+    justify-content:center;
+    gap: 1.4rem;
+    margin-top: 1.6rem;
+    font-size: 0.78rem;
+    color: var(--dim);
+  }
+  .filter-row span{ display:flex; align-items:center; gap:0.4rem; }
+  .filter-row .dot{ width:7px; height:7px; border-radius:50%; }
+  .filter-row .dot.produit{ background: var(--gold); }
+  .filter-row .dot.recette{ background: var(--sage); }
+ 
+  .timeline{
+    border-top: 1px solid var(--rule);
+  }
+ 
+  .entry{
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+ 
+  .tag{
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 2px 9px;
+    margin: 0 0 0.7rem;
+    border: 1px solid;
+  }
+  .tag.produit{ color: var(--gold-bright); border-color: rgba(201,162,39,0.5); }
+  .tag.recette{ color: var(--sage); border-color: rgba(126,156,110,0.5); }
+ 
+  .entry h2{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.65rem;
+    margin: 0 0 0.3rem;
+    color: var(--ink);
+  }
+ 
+  .entry .subtitle{
+    font-size: 0.86rem;
+    color: var(--muted);
+    margin: 0 0 0.7rem;
+    font-style: italic;
+  }
+ 
+  .entry p.text{
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 56ch;
+  }
+  .entry p.text.placeholder{ color: var(--dim); font-style: italic; }
+ 
+  footer.colophon{
+    margin-top: 2.4rem;
+    text-align:center;
+    font-size: 0.78rem;
+    color: var(--dim);
+  }
+</style>
+</head>
+<body>
+ 
+<div class="page">
+  <header class="masthead">
+    <p class="kicker"><a href="epicure.html">Epicure</a> — gastronomie, cuisine, œnologie, mixologie</p>
+    <h1>Cuisine &amp; produits</h1>
+    <p class="lede">Recettes mises à l'épreuve, produits dénichés au fil des saisons.</p>
+    <div class="filter-row">
+      <span><span class="dot produit"></span>Produit</span>
+      <span><span class="dot recette"></span>Recette</span>
+    </div>
+  </header>
+ 
+  <div class="timeline">
+ 
+    <article class="entry">
+      <span class="tag produit">Produit</span>
+      <h2>Les huiles d'olive du Moulin Castelas</h2>
+      <p class="subtitle">AOP Vallée des Baux-de-Provence</p>
+      <p class="text placeholder">Notes à rédiger : les cuvées, les saveurs, la provenance, et mon goût sur chacune.</p>
+    </article>
+ 
+    <article class="entry">
+      <span class="tag produit">Produit</span>
+      <h2>Les moutardes Edmond Fallot</h2>
+      <p class="subtitle">Moutarderie artisanale à la meule de pierre, Beaune</p>
+      <p class="text placeholder">Notes à rédiger.</p>
+    </article>
+ 
+    <article class="entry">
+      <span class="tag produit">Produit</span>
+      <h2>La conserverie La Belle-Iloise</h2>
+      <p class="subtitle">Conserverie bretonne, Quiberon</p>
+      <p class="text placeholder">Notes à rédiger.</p>
+    </article>
+ 
+    <article class="entry">
+      <span class="tag recette">Recette</span>
+      <h2>Cuire le riz à sushi</h2>
+      <p class="subtitle">Cuisson, assaisonnement, et déclinaisons : sushis, makis, bento</p>
+      <p class="text placeholder">Recette à rédiger.</p>
+    </article>
+ 
+    <article class="entry">
+      <span class="tag recette">Recette</span>
+      <h2>Les vrais carbonaras</h2>
+      <p class="subtitle">Sans crème, comme à Rome</p>
+      <p class="text placeholder">Recette à rédiger.</p>
+    </article>
+ 
+    <article class="entry">
+      <span class="tag recette">Recette</span>
+      <h2>La truffade auvergnate</h2>
+      <p class="subtitle">Pommes de terre et tome fraîche du Cantal</p>
+      <p class="text placeholder">Recette à rédiger.</p>
+    </article>
+ 
+    <article class="entry">
+      <span class="tag produit">Produit</span>
+      <h2>Sélection de miel</h2>
+      <p class="text placeholder">Notes à rédiger.</p>
+    </article>
+ 
+    <article class="entry">
+      <span class="tag produit">Produit</span>
+      <h2>Sélection de fromages</h2>
+      <p class="text placeholder">Notes à rédiger.</p>
+    </article>
+ 
+    <article class="entry">
+      <span class="tag produit">Produit</span>
+      <h2>Sélection de poissons</h2>
+      <p class="text placeholder">Notes à rédiger.</p>
+    </article>
+ 
+    <article class="entry">
+      <span class="tag produit">Produit</span>
+      <h2>Sélection de viandes</h2>
+      <p class="text placeholder">Notes à rédiger.</p>
+    </article>
+ 
+  </div>
+ 
+  <footer class="colophon">Une facette de l'Atlas des facettes.</footer>
+</div>
+ 
+</body>
+</html>
