@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tables — Epicure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #241012;
+    --panel: #2E1518;
+    --ink: #F1E6D3;
+    --ink-soft: #D8C6AE;
+    --gold: #C9A227;
+    --gold-bright: #E8C765;
+    --muted: #8C6F52;
+    --rule: rgba(201,162,39,0.25);
+    --dim: #6B4F45;
+    --terracotta: #B5613F;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Work Sans', sans-serif;
+  }
+ 
+  *{ box-sizing: border-box; }
+ 
+  html,body{
+    margin:0;
+    padding:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+ 
+  body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding: clamp(2.5rem, 6vw, 5rem) clamp(1.25rem, 4vw, 2rem);
+  }
+ 
+  a{ color: inherit; }
+ 
+  .page{
+    width: 100%;
+    max-width: 780px;
+  }
+ 
+  header.masthead{
+    text-align:center;
+    margin-bottom: clamp(2.4rem, 5vw, 3.4rem);
+  }
+ 
+  .kicker{
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    margin: 0 0 0.6rem;
+  }
+  .kicker a{
+    text-decoration: none;
+    border-bottom: 1px solid rgba(140,111,82,0.4);
+  }
+  .kicker a:hover{ color: var(--gold-bright); border-bottom-color: var(--gold-bright); }
+ 
+  h1{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.4rem, 5.6vw, 3.3rem);
+    margin: 0 0 0.9rem;
+    color: var(--ink);
+  }
+ 
+  .lede{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 48ch;
+    margin: 0 auto;
+    line-height: 1.55;
+  }
+ 
+  .timeline{
+    border-top: 1px solid var(--rule);
+  }
+ 
+  .entry{
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+ 
+  .entry.empty{ opacity: 0.55; }
+ 
+  .tag{
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 2px 9px;
+    margin: 0 0 0.7rem;
+    border: 1px solid;
+  }
+  .tag.bib{ color: var(--terracotta); border-color: rgba(181,97,63,0.55); }
+  .tag.etoile{ color: var(--gold-bright); border-color: rgba(201,162,39,0.5); }
+  .tag.venir{ color: var(--dim); border-color: var(--dim); }
+ 
+  .stars{ letter-spacing: 0.15em; }
+ 
+  .entry h2{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.65rem;
+    margin: 0 0 0.3rem;
+    color: var(--ink);
+  }
+  .entry.empty h2{ color: var(--muted); font-style: italic; font-weight: 500; }
+ 
+  .entry .subtitle{
+    font-size: 0.86rem;
+    color: var(--muted);
+    margin: 0 0 0.7rem;
+    font-style: italic;
+  }
+ 
+  .entry p.text{
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 56ch;
+  }
+  .entry p.text.placeholder{ color: var(--dim); font-style: italic; }
+ 
+  footer.colophon{
+    margin-top: 2.4rem;
+    text-align:center;
+    font-size: 0.78rem;
+    color: var(--dim);
+  }
+</style>
+</head>
+<body>
+ 
+<div class="page">
+  <header class="masthead">
+    <p class="kicker"><a href="epicure.html">Epicure</a> — gastronomie, cuisine, œnologie, mixologie</p>
+    <h1>Tables</h1>
+    <p class="lede">Adresses visitées, plats jugés, additions commentées sans complaisance.</p>
+  </header>
+ 
+  <div class="timeline">
+ 
+    <article class="entry">
+      <h2>Le Banquet</h2>
+      <p class="subtitle">Paris</p>
+      <p class="text placeholder">Récit à rédiger.</p>
+    </article>
+ 
+    <article class="entry">
+      <h2>Bistro Têtedoie</h2>
+      <p class="subtitle">Lyon</p>
+      <p class="text placeholder">Récit à rédiger.</p>
+    </article>
+ 
+    <article class="entry">
+      <span class="tag bib">Bib Gourmand</span>
+      <h2>L'Amphytrion</h2>
+      <p class="subtitle">Limoges</p>
+      <p class="text placeholder">Récit à rédiger.</p>
+    </article>
+ 
+    <article class="entry">
+      <span class="tag etoile"><span class="stars">★</span> 1 étoile</span>
+      <h2>Levanteau</h2>
+      <p class="subtitle">Limoges</p>
+      <p class="text placeholder">Récit à rédiger.</p>
+    </article>
+ 
+    <article class="entry">
+      <span class="tag etoile"><span class="stars">★</span> 1 étoile</span>
+      <h2>Le Radio</h2>
+      <p class="subtitle">Royat</p>
+      <p class="text placeholder">Récit à rédiger.</p>
+    </article>
+ 
+    <article class="entry">
+      <span class="tag etoile"><span class="stars">★★</span> 2 étoiles</span>
+      <h2>Le Pré</h2>
+      <p class="subtitle">Chamalières</p>
+      <p class="text placeholder">Récit à rédiger.</p>
+    </article>
+ 
+    <article class="entry empty">
+      <span class="tag venir">À venir</span>
+      <h2>Table à découvrir</h2>
+      <p class="text placeholder">Adresse à ajouter.</p>
+    </article>
+ 
+    <article class="entry empty">
+      <span class="tag venir">À venir</span>
+      <h2>Table à découvrir</h2>
+      <p class="text placeholder">Adresse à ajouter.</p>
+    </article>
+ 
+    <article class="entry empty">
+      <span class="tag venir">À venir</span>
+      <h2>Table à découvrir</h2>
+      <p class="text placeholder">Adresse à ajouter.</p>
+    </article>
+ 
+  </div>
+ 
+  <footer class="colophon">Une facette de l'Atlas des facettes.</footer>
+</div>
+ 
+</body>
+</html>
