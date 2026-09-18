@@ -11,6 +11,7 @@
   :root{
     --bg: #241012;
     --panel: #2E1518;
+    --panel-raised: #3A1B1E;
     --ink: #F1E6D3;
     --ink-soft: #D8C6AE;
     --gold: #C9A227;
@@ -19,6 +20,8 @@
     --rule: rgba(201,162,39,0.25);
     --dim: #6B4F45;
     --sage: #7E9C6E;
+    --radius: 10px;
+    --shadow: 0 14px 34px rgba(10,4,5,0.45);
     --font-display: 'Cormorant Garamond', serif;
     --font-body: 'Work Sans', sans-serif;
   }
@@ -46,12 +49,12 @@
  
   .page{
     width: 100%;
-    max-width: 780px;
+    max-width: 1080px;
   }
  
   header.masthead{
     text-align:center;
-    margin-bottom: clamp(2.4rem, 5vw, 3.4rem);
+    margin-bottom: clamp(2rem, 5vw, 3rem);
   }
  
   .kicker{
@@ -69,7 +72,7 @@
   h1{
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: clamp(2.4rem, 5.6vw, 3.3rem);
+    font-size: clamp(2.2rem, 5.2vw, 3.1rem);
     margin: 0 0 0.9rem;
     color: var(--ink);
   }
@@ -77,83 +80,207 @@
   .lede{
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 1.1rem;
+    font-size: 1.08rem;
     color: var(--ink-soft);
-    max-width: 48ch;
+    max-width: 52ch;
     margin: 0 auto;
     line-height: 1.55;
   }
  
-  .filter-row{
+  /* --- Gallery groups --- */
+ 
+  .group{ margin-top: 2.6rem; }
+  .group-head{
     display:flex;
-    justify-content:center;
-    gap: 1.4rem;
-    margin-top: 1.6rem;
+    align-items: baseline;
+    gap: 0.7rem;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.6rem;
+    margin-bottom: 1.2rem;
+  }
+  .group-head h2{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.55rem;
+    margin: 0;
+    color: var(--gold-bright);
+  }
+  .group-head .count{
     font-size: 0.78rem;
     color: var(--dim);
   }
-  .filter-row span{ display:flex; align-items:center; gap:0.4rem; }
-  .filter-row .dot{ width:7px; height:7px; border-radius:50%; }
-  .filter-row .dot.produit{ background: var(--gold); }
-  .filter-row .dot.recette{ background: var(--sage); }
  
-  .timeline{
-    border-top: 1px solid var(--rule);
+  .gallery{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.1rem;
   }
  
-  .entry{
-    padding: 2rem 0;
-    border-bottom: 1px solid var(--rule);
+  .card{
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .card:hover{
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+    border-color: rgba(201,162,39,0.55);
   }
  
-  .tag{
-    display: inline-block;
-    font-size: 0.7rem;
-    letter-spacing: 0.07em;
+  .card-cover{
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+    filter: sepia(10%) saturate(105%);
+    background: var(--panel-raised);
+  }
+ 
+  .card-cover.placeholder{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 2.6rem;
+    color: var(--dim);
+    background:
+      repeating-linear-gradient(135deg, var(--panel-raised), var(--panel-raised) 10px, var(--panel) 10px, var(--panel) 20px);
+  }
+ 
+  .card-body{ padding: 0.85rem 1rem 1rem; }
+ 
+  .card-tag{
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    padding: 2px 9px;
-    margin: 0 0 0.7rem;
-    border: 1px solid;
+    color: var(--sage);
+    margin: 0 0 0.25rem;
   }
-  .tag.produit{ color: var(--gold-bright); border-color: rgba(201,162,39,0.5); }
-  .tag.recette{ color: var(--sage); border-color: rgba(126,156,110,0.5); }
  
-  .entry h2{
+  .card-title{
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: 1.65rem;
-    margin: 0 0 0.3rem;
+    font-size: 1.2rem;
+    margin: 0 0 0.2rem;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+ 
+  .card-terroir{
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--muted);
+    margin: 0;
+  }
+ 
+  /* --- Modal --- */
+ 
+  .overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(12,5,6,0.78);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    z-index: 999;
+  }
+  .overlay.open{ display: flex; }
+ 
+  .modal{
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    max-height: 86vh;
+    overflow-y: auto;
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+  }
+ 
+  .modal-close{
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.4);
+    color: var(--ink);
+    border: none;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease, color 0.15s ease;
+    z-index: 2;
+  }
+  .modal-close:hover{ background: var(--gold-bright); color: var(--bg); }
+ 
+  .modal-cover{
+    width: 100%;
+    max-height: 320px;
+    object-fit: cover;
+    display: block;
+    filter: sepia(10%) saturate(105%);
+  }
+  .modal-cover.placeholder{
+    height: 200px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 3.4rem;
+    color: var(--dim);
+    background:
+      repeating-linear-gradient(135deg, var(--panel-raised), var(--panel-raised) 12px, var(--panel) 12px, var(--panel) 24px);
+  }
+ 
+  .modal-body{ padding: 1.6rem 1.8rem 2rem; }
+ 
+  .modal-breadcrumb{
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin: 0 0 0.5rem;
+  }
+ 
+  .modal-title{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.9rem;
+    margin: 0 0 0.4rem;
     color: var(--ink);
   }
  
-  .entry .subtitle{
-    font-size: 0.86rem;
-    color: var(--muted);
-    margin: 0 0 0.7rem;
+  .modal-terroir{
+    font-size: 0.9rem;
     font-style: italic;
+    color: var(--muted);
+    margin: 0 0 1.1rem;
   }
  
-  .entry .photo{
-    width: 100%;
-    max-height: 260px;
-    object-fit: cover;
-    display: block;
-    margin: 0.9rem 0 1.1rem;
-    border: 1px solid var(--rule);
-    filter: sepia(12%) saturate(105%);
-  }
- 
-  .entry p.text{
-    font-size: 0.95rem;
-    line-height: 1.6;
+  .modal-text{
+    font-size: 0.98rem;
+    line-height: 1.65;
     color: var(--ink-soft);
     margin: 0;
-    max-width: 56ch;
   }
-  .entry p.text.placeholder{ color: var(--dim); font-style: italic; }
+  .modal-text.placeholder{ color: var(--dim); font-style: italic; }
  
   footer.colophon{
-    margin-top: 2.4rem;
+    margin-top: 3rem;
     text-align:center;
     font-size: 0.78rem;
     color: var(--dim);
@@ -166,88 +293,205 @@
   <header class="masthead">
     <p class="kicker"><a href="epicure.html">Epicure</a> — gastronomie, cuisine, œnologie, mixologie</p>
     <h1>Cuisine &amp; produits</h1>
-    <p class="lede">Recettes mises à l'épreuve, produits dénichés au fil des saisons.</p>
-    <div class="filter-row">
-      <span><span class="dot produit"></span>Produit</span>
-      <span><span class="dot recette"></span>Recette</span>
-    </div>
+    <p class="lede">Recettes mises à l'épreuve, produits dénichés au fil des saisons. Touchez une fiche pour l'ouvrir.</p>
   </header>
  
-  <div class="timeline">
- 
-    <article class="entry">
-      <span class="tag produit">Produit</span>
-      <h2>Les huiles d'olive du Moulin Castelas</h2>
-      <p class="subtitle">AOP Vallée des Baux-de-Provence</p>
-      <img class="photo" src="https://commons.wikimedia.org/wiki/Special:FilePath/Huile%20d%27Olives%20des%20Baux%20de%20Provence.JPG" alt="Huile d'olive de la vallée des Baux-de-Provence">
-      <p class="text placeholder">Notes à rédiger : les cuvées, les saveurs, la provenance, et mon goût sur chacune.</p>
-    </article>
- 
-    <article class="entry">
-      <span class="tag produit">Produit</span>
-      <h2>Les moutardes Edmond Fallot</h2>
-      <p class="subtitle">Moutarderie artisanale à la meule de pierre, Beaune</p>
-      <img class="photo" src="https://commons.wikimedia.org/wiki/Special:FilePath/Pot%20pour%20moutarde%20de%20Bourgogne.JPG" alt="Pot de moutarde de Bourgogne">
-      <p class="text placeholder">Notes à rédiger.</p>
-    </article>
- 
-    <article class="entry">
-      <span class="tag produit">Produit</span>
-      <h2>La conserverie La Belle-Iloise</h2>
-      <p class="subtitle">Conserverie bretonne, Quiberon</p>
-      <img class="photo" src="https://commons.wikimedia.org/wiki/Special:FilePath/PSM%20V59%20D564%20Sardine%20cannery%20employees%20in%20brittany.png" alt="Conserverie de sardines en Bretagne">
-      <p class="text placeholder">Notes à rédiger.</p>
-    </article>
- 
-    <article class="entry">
-      <span class="tag recette">Recette</span>
-      <h2>Cuire le riz à sushi</h2>
-      <p class="subtitle">Cuisson, assaisonnement, et déclinaisons : sushis, makis, bento</p>
-      <p class="text placeholder">Recette à rédiger.</p>
-    </article>
- 
-    <article class="entry">
-      <span class="tag recette">Recette</span>
-      <h2>Les vrais carbonaras</h2>
-      <p class="subtitle">Sans crème, comme à Rome</p>
-      <p class="text placeholder">Recette à rédiger.</p>
-    </article>
- 
-    <article class="entry">
-      <span class="tag recette">Recette</span>
-      <h2>La truffade auvergnate</h2>
-      <p class="subtitle">Pommes de terre et tome fraîche du Cantal</p>
-      <p class="text placeholder">Recette à rédiger.</p>
-    </article>
- 
-    <article class="entry">
-      <span class="tag produit">Produit</span>
-      <h2>Sélection de miel</h2>
-      <p class="text placeholder">Notes à rédiger.</p>
-    </article>
- 
-    <article class="entry">
-      <span class="tag produit">Produit</span>
-      <h2>Sélection de fromages</h2>
-      <p class="text placeholder">Notes à rédiger.</p>
-    </article>
- 
-    <article class="entry">
-      <span class="tag produit">Produit</span>
-      <h2>Sélection de poissons</h2>
-      <p class="text placeholder">Notes à rédiger.</p>
-    </article>
- 
-    <article class="entry">
-      <span class="tag produit">Produit</span>
-      <h2>Sélection de viandes</h2>
-      <p class="text placeholder">Notes à rédiger.</p>
-    </article>
- 
-  </div>
+  <div id="gallery-root"></div>
  
   <footer class="colophon">Une facette de l'Atlas des facettes.</footer>
 </div>
+ 
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modal-close" aria-label="Fermer">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+ 
+<script>
+  const PRODUCTS = [
+    {
+      id: "castelas",
+      categorie: "Épicerie salée",
+      sousCategorie: "Huile d'olive",
+      titre: "Les huiles d'olive du Moulin Castelas",
+      terroir: "AOP Vallée des Baux-de-Provence",
+      image: "https://commons.wikimedia.org/wiki/Special:FilePath/Huile%20d%27Olives%20des%20Baux%20de%20Provence.JPG",
+      texte: "Notes à rédiger : les cuvées, les saveurs, la provenance, et mon goût sur chacune."
+    },
+    {
+      id: "fallot",
+      categorie: "Épicerie salée",
+      sousCategorie: "Moutarde",
+      titre: "Les moutardes Edmond Fallot",
+      terroir: "Beaune, Bourgogne — meule de pierre",
+      image: "https://commons.wikimedia.org/wiki/Special:FilePath/Pot%20pour%20moutarde%20de%20Bourgogne.JPG",
+      texte: "Notes à rédiger."
+    },
+    {
+      id: "belle-iloise",
+      categorie: "Épicerie salée",
+      sousCategorie: "Conserve",
+      titre: "La conserverie La Belle-Iloise",
+      terroir: "Quiberon, Bretagne",
+      image: "https://commons.wikimedia.org/wiki/Special:FilePath/PSM%20V59%20D564%20Sardine%20cannery%20employees%20in%20brittany.png",
+      texte: "Notes à rédiger."
+    },
+    {
+      id: "miel",
+      categorie: "Épicerie sucrée",
+      sousCategorie: "Miel",
+      titre: "Sélection de miel",
+      terroir: "",
+      image: "",
+      texte: "Notes à rédiger."
+    },
+    {
+      id: "fromages",
+      categorie: "Fromage",
+      sousCategorie: "",
+      titre: "Sélection de fromages",
+      terroir: "",
+      image: "",
+      texte: "Notes à rédiger."
+    },
+    {
+      id: "poissons",
+      categorie: "Poisson",
+      sousCategorie: "",
+      titre: "Sélection de poissons",
+      terroir: "",
+      image: "",
+      texte: "Notes à rédiger."
+    },
+    {
+      id: "viandes",
+      categorie: "Viande",
+      sousCategorie: "",
+      titre: "Sélection de viandes",
+      terroir: "",
+      image: "",
+      texte: "Notes à rédiger."
+    },
+    {
+      id: "riz-sushi",
+      categorie: "Recette",
+      sousCategorie: "Riz",
+      titre: "Cuire le riz à sushi",
+      terroir: "Japon — sushis, makis, bento",
+      image: "",
+      texte: "Recette à rédiger."
+    },
+    {
+      id: "carbonara",
+      categorie: "Recette",
+      sousCategorie: "Pâtes",
+      titre: "Les vrais carbonaras",
+      terroir: "Rome, Italie — sans crème",
+      image: "",
+      texte: "Recette à rédiger."
+    },
+    {
+      id: "truffade",
+      categorie: "Recette",
+      sousCategorie: "Plat régional",
+      titre: "La truffade auvergnate",
+      terroir: "Cantal, Auvergne",
+      image: "",
+      texte: "Recette à rédiger."
+    }
+  ];
+ 
+  const GROUP_ORDER = ["Épicerie salée","Épicerie sucrée","Fromage","Poisson","Viande","Recette"];
+ 
+  const root = document.getElementById('gallery-root');
+  const overlay = document.getElementById('overlay');
+  const modalContent = document.getElementById('modal-content');
+ 
+  function initial(str){ return str.trim().charAt(0).toUpperCase(); }
+ 
+  function renderGallery(){
+    GROUP_ORDER.forEach(cat => {
+      const items = PRODUCTS.filter(p => p.categorie === cat);
+      if (!items.length) return;
+ 
+      const group = document.createElement('section');
+      group.className = 'group';
+ 
+      const head = document.createElement('div');
+      head.className = 'group-head';
+      head.innerHTML = '<h2>' + cat + '</h2><span class="count">' + items.length + '</span>';
+      group.appendChild(head);
+ 
+      const grid = document.createElement('div');
+      grid.className = 'gallery';
+ 
+      items.forEach(p => {
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.addEventListener('click', () => openModal(p.id));
+ 
+        if (p.image) {
+          const img = document.createElement('img');
+          img.className = 'card-cover';
+          img.src = p.image;
+          img.alt = p.titre;
+          card.appendChild(img);
+        } else {
+          const ph = document.createElement('div');
+          ph.className = 'card-cover placeholder';
+          ph.textContent = initial(p.titre);
+          card.appendChild(ph);
+        }
+ 
+        const body = document.createElement('div');
+        body.className = 'card-body';
+        let html = '';
+        if (p.sousCategorie) html += '<p class="card-tag">' + p.sousCategorie + '</p>';
+        html += '<h3 class="card-title">' + p.titre + '</h3>';
+        if (p.terroir) html += '<p class="card-terroir">' + p.terroir + '</p>';
+        body.innerHTML = html;
+        card.appendChild(body);
+ 
+        grid.appendChild(card);
+      });
+ 
+      group.appendChild(grid);
+      root.appendChild(group);
+    });
+  }
+ 
+  function openModal(id){
+    const p = PRODUCTS.find(x => x.id === id);
+    if (!p) return;
+ 
+    let html = '';
+    if (p.image) {
+      html += '<img class="modal-cover" src="' + p.image + '" alt="' + p.titre + '">';
+    } else {
+      html += '<div class="modal-cover placeholder">' + initial(p.titre) + '</div>';
+    }
+    html += '<div class="modal-body">';
+    html += '<p class="modal-breadcrumb">' + p.categorie + (p.sousCategorie ? ' — ' + p.sousCategorie : '') + '</p>';
+    html += '<h2 class="modal-title">' + p.titre + '</h2>';
+    if (p.terroir) html += '<p class="modal-terroir">' + p.terroir + '</p>';
+    html += '<p class="modal-text ' + (p.texte.includes('à rédiger') ? 'placeholder' : '') + '">' + p.texte + '</p>';
+    html += '</div>';
+ 
+    modalContent.innerHTML = html;
+    overlay.classList.add('open');
+  }
+ 
+  function closeModal(){
+    overlay.classList.remove('open');
+  }
+ 
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+ 
+  renderGallery();
+</script>
  
 </body>
 </html>
